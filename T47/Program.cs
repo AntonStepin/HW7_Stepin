@@ -41,17 +41,17 @@ void Print2DArray(double[,] ArrayToPrint)
 
 }
 
-int OnlyNumber(string CheckChar)
+int OnlyNumber(string CheckForNumber)
 {
     string resulult = "0";
-    char[] arr;
+    char[] YourStringToChars;
 
-    arr = CheckChar.ToCharArray(0, CheckChar.Length);
-    for (int i = 0; i < CheckChar.Length; i++)
+    YourStringToChars = CheckForNumber.ToCharArray(0, CheckForNumber.Length);
+    for (int i = 0; i < CheckForNumber.Length; i++)
     {
-        if (char.IsDigit(arr[i]))
+        if (char.IsDigit(YourStringToChars[i]))
         {
-            resulult = resulult + arr[i];
+            resulult = resulult + YourStringToChars[i];
         }
         else
         {
