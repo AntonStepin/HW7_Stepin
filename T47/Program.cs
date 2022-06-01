@@ -13,7 +13,7 @@ double[,] Fill2dArrayRandom(int RowNumber, int ColNumber)
     {
         for (int j = 0; j < ColNumber; j++)
         {
-            result[i, j] = Math.Round(new Random().NextDouble() * 20-10, 2);
+            result[i, j] = Math.Round(new Random().NextDouble() * 20 - 10, 2);
         }
     }
     return result;
@@ -25,13 +25,12 @@ void Print2DArray(double[,] ArrayToPrint)
     const int StartLatterIndex = 65;
     for (int i = StartLatterIndex + 0; i < StartLatterIndex + ArrayToPrint.GetLength(1); i++)
     {
-        Console.Write($"[{((char)i)}]\t");
-
+        if (ArrayToPrint.GetLength(0) > 0 && ArrayToPrint.GetLength(1) > 0) Console.Write($"[{((char)i)}]\t");
     }
     Console.WriteLine();
     for (int i = 0; i < ArrayToPrint.GetLength(0); i++)
     {
-        Console.Write("[" + i + "]\t");
+        if (ArrayToPrint.GetLength(0) > 0 && ArrayToPrint.GetLength(1) > 0) Console.Write("[" + i + "]\t");
 
         for (int j = 0; j < ArrayToPrint.GetLength(1); j++)
         {
@@ -41,5 +40,36 @@ void Print2DArray(double[,] ArrayToPrint)
     }
 
 }
-double[,] MyArray = Fill2dArrayRandom(5, 6);
+
+int OnlyNumber(string CheckChar)
+{
+    string resulult = "0";
+    char[] arr;
+
+    arr = CheckChar.ToCharArray(0, CheckChar.Length);
+    for (int i = 0; i < CheckChar.Length; i++)
+    {
+        if (char.IsDigit(arr[i]))
+        {
+            resulult = resulult + arr[i];
+        }
+        else
+        {
+            Console.WriteLine("Вы ввели нечисловое или отрицательное значение.");
+            Console.WriteLine("Изначальное значение = 0.");
+            break;
+        }
+    }
+    int number = int.Parse(resulult);
+    return number;
+}
+
+
+Console.Write("Введите количество строк массива: ");
+string? Row = Console.ReadLine();
+int RowIn = OnlyNumber(Row); // напишите пжлста в комментарии к ДЗ, как исправить...заранее Спасибо!)
+Console.Write("Введите количество столбцов массива: ");
+string? Col = Console.ReadLine();
+int ColIn = OnlyNumber(Col);
+double[,] MyArray = Fill2dArrayRandom(RowIn, ColIn);
 Print2DArray(MyArray);
