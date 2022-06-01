@@ -25,13 +25,13 @@ void Print2DArray(int[,] ArrayToPrint)
     const int StartLatterIndex = 65;
     for (int i = StartLatterIndex + 0; i < StartLatterIndex + ArrayToPrint.GetLength(1); i++)
     {
-        Console.Write($"[{((char)i)}]\t");
+        if (ArrayToPrint.GetLength(0) > 0 && ArrayToPrint.GetLength(1) > 0) Console.Write($"[{((char)i)}]\t");
 
     }
     Console.WriteLine();
     for (int i = 0; i < ArrayToPrint.GetLength(0); i++)
     {
-        Console.Write("[" + i + "]\t");
+        if (ArrayToPrint.GetLength(0) > 0 && ArrayToPrint.GetLength(1) > 0) Console.Write("[" + i + "]\t");
 
         for (int j = 0; j < ArrayToPrint.GetLength(1); j++)
         {
@@ -44,7 +44,7 @@ void Print2DArray(int[,] ArrayToPrint)
 
 void ShowMePosition2dArray(int[,] array, int position)
 {
-    int[] temparray = new int[array.GetLength(0)*array.GetLength(1)];
+    int[] temparray = new int[array.GetLength(0) * array.GetLength(1)];
     int count = 0;
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -65,13 +65,40 @@ void ShowMePosition2dArray(int[,] array, int position)
     }
 }
 
+int OnlyNumber(string CheckForNumber)
+{
+    string resulult = "0";
+    char[] YourStringToChars;
+
+    YourStringToChars = CheckForNumber.ToCharArray(0, CheckForNumber.Length);
+    for (int i = 0; i < CheckForNumber.Length; i++)
+    {
+        if (char.IsDigit(YourStringToChars[i]))
+        {
+            resulult = resulult + YourStringToChars[i];
+        }
+        else
+        {
+            Console.WriteLine("Вы ввели нечисловое или отрицательное значение.");
+            Console.WriteLine("Изначальное значение = 0.");
+            break;
+        }
+    }
+    int number = int.Parse(resulult);
+    return number;
+}
+
+
 Console.Write("Введите количество строк массива: ");
-int Row = Convert.ToInt32(Console.ReadLine());
+string? Row = Console.ReadLine();
+int RowInt = OnlyNumber(Row);
 Console.Write("Введите количество столбцов массива: ");
-int Col = Convert.ToInt32(Console.ReadLine());
+string? Col = Console.ReadLine();
+int ColInt = OnlyNumber(Col);
 Console.WriteLine("Ваш случайный массив:");
-int[,] MyArray = Fill2dArrayRandom(Row, Col);
+int[,] MyArray = Fill2dArrayRandom(RowInt, ColInt);
 Print2DArray(MyArray);
 Console.Write("Какую позицию Вы хотите найти: ");
-int MyPosition = Convert.ToInt32(Console.ReadLine());
-ShowMePosition2dArray(MyArray,MyPosition);
+string? MyPosition = Console.ReadLine();
+int MyPositionInt = OnlyNumber(MyPosition);
+ShowMePosition2dArray(MyArray, MyPositionInt);
